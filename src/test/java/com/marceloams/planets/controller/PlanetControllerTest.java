@@ -2,7 +2,6 @@ package com.marceloams.planets.controller;
 
 import com.marceloams.planets.PlanetsApplication;
 import com.marceloams.planets.dto.PlanetDTO;
-import com.marceloams.planets.model.Planet;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 

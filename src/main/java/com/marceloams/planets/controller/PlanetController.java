@@ -1,14 +1,14 @@
 package com.marceloams.planets.controller;
 
 import com.marceloams.planets.dto.PlanetDTO;
+import com.marceloams.planets.model.Planet;
 import com.marceloams.planets.service.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,6 +35,16 @@ public class PlanetController {
         PlanetDTO planetDTO = planetService.getByName(name);
 
         return ResponseEntity.ok(planetDTO);
+    }
+
+    private URI getURI(Long id){
+        return ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/api/v1/planets/{id}").buildAndExpand(id).toUri();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<PlanetDTO> add(@RequestBody Planet planet){
+        PlanetDTO planetDTO = planetService.add(planet);
+        return ResponseEntity.created(getURI(planetDTO.getId())).build();
     }
 
 }
