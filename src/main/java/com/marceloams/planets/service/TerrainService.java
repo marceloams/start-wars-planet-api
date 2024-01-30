@@ -20,7 +20,7 @@ public class TerrainService {
         return terrainRepository.save(new Terrain(name));
     }
 
-    private Terrain getByName(String name){
+    protected Terrain getByName(String name){
         return terrainRepository.findByName(name);
     }
 
