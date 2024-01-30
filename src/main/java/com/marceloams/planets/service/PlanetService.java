@@ -32,10 +32,6 @@ public class PlanetService {
     }
 
     public PlanetDTO add(Planet planet){
-        Assert.isNull(planet.getId(), "Insertion not done, id must be null!");
-
-        terrainService.getTerrainsByName(planet.getTerrains());
-
         return PlanetDTO.create(planetRepository.save(planet));
     }
 

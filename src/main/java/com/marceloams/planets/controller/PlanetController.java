@@ -3,8 +3,11 @@ package com.marceloams.planets.controller;
 import com.marceloams.planets.dto.PlanetDTO;
 import com.marceloams.planets.model.Planet;
 import com.marceloams.planets.service.PlanetService;
+import com.marceloams.planets.service.SWAPIService;
+import com.marceloams.planets.service.TerrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,7 +19,13 @@ import java.util.List;
 public class PlanetController {
 
     @Autowired
-    PlanetService planetService;
+    private PlanetService planetService;
+
+    @Autowired
+    private TerrainService terrainService;
+
+    @Autowired
+    private SWAPIService swapiService;
 
     @GetMapping
     public ResponseEntity<List<PlanetDTO>> getAll(){
@@ -43,7 +52,15 @@ public class PlanetController {
 
     @PostMapping("/add")
     public ResponseEntity<PlanetDTO> add(@RequestBody Planet planet){
+        Assert.isNull(planet.getId(), "Insertion not done, id must be null!");
+        Assert.hasText(planet.getName(), "Insertion not done, planet name cannot be blank!");
+
+        terrainService.getTerrainsByName(planet.getTerrains());
+
+        planet.setMovieAppearancesNumber(swapiService.getMovieAppearancesNumber(planet.getName()));
+
         PlanetDTO planetDTO = planetService.add(planet);
+
         return ResponseEntity.created(getURI(planetDTO.getId())).build();
     }
 

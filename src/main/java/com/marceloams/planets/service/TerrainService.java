@@ -15,7 +15,7 @@ public class TerrainService {
     private TerrainRepository terrainRepository;
 
     private Terrain add(String name){
-        Assert.hasText(name, "Insertion not done, name must have some text!");
+        Assert.hasText(name, "Insertion not done, terrain name cannot be blank!");
 
         return terrainRepository.save(new Terrain(name));
     }
