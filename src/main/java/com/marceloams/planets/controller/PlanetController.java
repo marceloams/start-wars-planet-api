@@ -3,7 +3,7 @@ package com.marceloams.planets.controller;
 import com.marceloams.planets.dto.PlanetDTO;
 import com.marceloams.planets.model.Planet;
 import com.marceloams.planets.service.PlanetService;
-import com.marceloams.planets.service.SWAPIService;
+import com.marceloams.planets.service.SwapiService;
 import com.marceloams.planets.service.TerrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class PlanetController {
     private TerrainService terrainService;
 
     @Autowired
-    private SWAPIService swapiService;
+    private SwapiService swapiService;
 
     @GetMapping
     public ResponseEntity<List<PlanetDTO>> getAll(){

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class SWAPIService {
+public class SwapiService {
 
     @Autowired
     WebClient webClient;
